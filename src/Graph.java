@@ -43,14 +43,18 @@ public class Graph {
 		//show siblings and children
 	
 		Node woody= new Node("Woody");
+		woody.description="wood";
 		
 		Node herb= new Node("Herb");
+		herb.description="herb";
 		Node kaya= new Node("Kaya");
+		kaya.description="kaya";
 		ArrayList<Node> l= new ArrayList<Node>();
 		l.add(woody);
 		l.add(herb);
 		l.add(kaya);
 		Node vascular= new Node("Vascular",l);
+		vascular.description="vascular";
 		root=vascular;
 		vascular.id="root";
 		

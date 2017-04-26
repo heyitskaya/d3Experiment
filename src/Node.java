@@ -16,7 +16,7 @@ public class Node {
 	ArrayList<Node> children;
 	String id;
 	String name;
-	String description = "fake!";
+	String description ;
 	Node parent; //we only let it have one parent
 	String image;
 	

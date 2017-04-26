@@ -21,7 +21,7 @@ links.forEach(function(link) {
   link.source = nodes[link.source] || (nodes[link.source] = {name: link.source});
   link.target = nodes[link.target] || (nodes[link.target] = {name: link.target});
 });
-
+var e= document.getElementById('parent');
 var width = 960,
     height = 500;
 
@@ -54,6 +54,7 @@ var node = svg.selectAll(".node")
 
 node.append("circle")
     .attr("r", 8);
+//node=
 
 node.append("text")
     .attr("x", 12)
@@ -69,9 +70,12 @@ function tick() {
 
   node
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
 }
 function onclick(node){
   console.log(node.name);
+
+
   //assign to it a new url
   //localhost:1234/data.js?node="Woody"
   //http://localhost:1234/data.js?node=Woody
@@ -87,8 +91,17 @@ function mouseover(node) {
       .duration(750)
       .attr("r", 20) //changed this
       //.append("text").text(function(d){ extraNodeInfo[node.name]; });
+    console.log(node,node.x);
+    console.log(node,node.y);
     console.log(node, extraNodeInfo[node.name])
-    document.getElementById('text').innerHTML =extraNodeInfo[node.name].description;
+    var elem = document.getElementById('text');
+    elem.innerHTML =extraNodeInfo[node.name].description;
+    elem.style.display='block';
+    elem.style['background-color']='f00';
+    elem.style.left=node.x+'px';
+    elem.style.top=node.y-30+'px';
+
+   // document.getElementById('text').st
     //var popup=document.getElementById("myPopup");
     //popup.classList.toggle("show");
  // d3.select(labels[0][d.index]).style("visibility","visible");
@@ -98,7 +111,9 @@ function mouseout(node) {
   d3.select(this).select("circle").transition()
       .duration(750)
       .attr("r", 8);
-          document.getElementById('text').innerHTML ="----";
+      document.getElementById('text').innerHTML ="----";
+      document.getElementById('text').style.display='none';
+     // document.getElementById('text').
 
   //d3.select(labels[0][d.index]).style("visibility","hidden");
 }

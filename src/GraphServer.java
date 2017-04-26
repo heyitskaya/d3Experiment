@@ -126,6 +126,7 @@ public class GraphServer extends AbstractHandler {
 				}
 				out.println("];");
 				
+				out.println("var extraNodeInfo = {};");
 				out.println("extraNodeInfo['"+node.name+"']= {description: '"+node.description+"'};");
 				for(Node n : children) {
 					// print info.put(name, values) statements for each node
@@ -140,50 +141,10 @@ public class GraphServer extends AbstractHandler {
 			} 
 			return;
 		}
-		
-		if("/node".equals(request.path)) {
-			//String node = request.getParameter("node", "root");
-			String node="root";
-			System.out.println("node "+node);
-			Node nodeToFind = model.graph.findNode(node);
-			//find the children
-			ArrayList<Node> children=model.graph.findChildren(nodeToFind);
-			
-			try (PrintWriter out = resp.getWriter()) {
-				view.printHTMLTop(out);
-				//find node to print
-				//print data for node
-				out.println("<script>var links = [");
-				for(Node n: children) {
-					//out.println(e.asJavascript()+",");
-					StringBuilder sb= new StringBuilder("");
-					sb.append("{source:");
-					sb.append("\"");
-					sb.append(model.graph.root.name );
-					sb.append("\"");
-					sb.append(", target:");
-					sb.append("\"");
-					sb.append(n.name);
-					sb.append("\"");
-					sb.append(", type:");
-					sb.append("\"licensing\"},");
-					out.println(sb.toString());
-					//turn sb.toString() into javascript
-					
-				}
-				out.println("];</script>");
-				
-				//out.println("console.log('hello from data.js for node="+node+"');");
-				view.printHTMLBottom(out);
-			} 
-			
-			//printHTMLPageForNode(nodeToFind);
-			// this html page will reference data.js?node=node
-			return;
-		}
+	
 		
 		//if they ask for something else, send them to root:
-		resp.sendRedirect("/node?node=root"); //fuck
+		resp.sendRedirect("/data.js?node=root"); //fuck
 		
 	/**	//create a settings page
 		if("/settings".equals(request.path)){
