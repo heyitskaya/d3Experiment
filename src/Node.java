@@ -18,7 +18,7 @@ public class Node {
 	String name;
 	String description ;
 	Node parent; //we only let it have one parent
-	String image;
+	//String image="http://www.google.com/intl/en_com/images/logo_plain.png";
 	
 	public Node(){
 		children= new ArrayList<Node>();
