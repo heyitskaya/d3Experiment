@@ -98,9 +98,11 @@ public class GraphServer extends AbstractHandler {
 			System.out.println("nodeID "+nodeID);
 			
 			Node node = model.graph.findNode(nodeID);
+			System.out.println("is it null "+node==null);
 			//List<Edge> edges = node.findEdgesThatAreInteresting(graph);
 			ArrayList<Node> children=model.graph.findChildren(node);
-			System.out.println("it has "+children.size()+"children");
+			System.out.println("children "+children.toString());
+			//System.out.println("it has "+children.size()+"children");
 			
 			try (PrintWriter out = resp.getWriter()) {
 				view.printHTMLTop(out);
@@ -108,7 +110,6 @@ public class GraphServer extends AbstractHandler {
 				out.println("<script>var links = [");
 				// edges!
 				for(Node n: children) {
-					System.out.println("in for loop");
 					//out.println()
 					//out.println(e.asJavascript()+",");
 					StringBuilder sb= new StringBuilder("");
@@ -127,10 +128,17 @@ public class GraphServer extends AbstractHandler {
 				out.println("];");
 				
 				out.println("var extraNodeInfo = {};");
+				out.println("var nodePhoto={};");
+				
 				out.println("extraNodeInfo['"+node.name+"']= {description: '"+node.description+"'};");
 				for(Node n : children) {
 					// print info.put(name, values) statements for each node
+					
 					out.println("extraNodeInfo['"+n.name+"']= {description: '"+n.description+"'};");
+				}
+				out.println("nodePhoto['"+node.name+"']= {picture: '"+node.image+"'};");
+				for(Node n:children){
+					out.println("nodePhoto['"+n.name+"']= {picture: '"+n.image+"'};");
 				}
 				
 				

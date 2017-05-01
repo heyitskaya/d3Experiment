@@ -18,7 +18,8 @@ public class Node {
 	String name;
 	String description ;
 	Node parent; //we only let it have one parent
-	//String image="http://www.google.com/intl/en_com/images/logo_plain.png";
+	String image="http://www.google.com/intl/en_com/images/logo_plain.png";
+	//String image="http://www.rodalesorganiclife.com/sites/rodalesorganiclife.com/files/articles/2016/05/peonies1_melis_102522.jpg";
 	
 	public Node(){
 		children= new ArrayList<Node>();

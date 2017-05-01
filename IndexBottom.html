@@ -101,7 +101,10 @@ function mouseover(node) {
     elem.style.left=node.x+'px';
     elem.style.top=node.y-30+'px';
     var img=document.createElement("img");
-    img.src = "http://www.google.com/intl/en_com/images/logo_plain.png";
+    //img.src = "http://www.google.com/intl/en_com/images/logo_plain.png";
+   
+    console.log(node, nodePhoto[node.name]);
+    img.src=nodePhoto[node.name].picture;
 
     //var src = document.getElementById("header");
     elem.appendChild(img);
