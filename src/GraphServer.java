@@ -91,17 +91,13 @@ public class GraphServer extends AbstractHandler {
 			throws IOException, ServletException {		
 		Map<String,String[]> map= req.getParameterMap();
 		ServerRequest request = new ServerRequest(req, resp);
-		System.out.println(request.path);
 		// if some asks for data.js, say this:
 		if("/data.js".equals(request.path)){
 			String nodeID = request.getParameter("node", "root");
-			System.out.println("nodeID "+nodeID);
 			
 			Node node = model.graph.findNode(nodeID);
-			System.out.println("is it null "+node==null);
 			//List<Edge> edges = node.findEdgesThatAreInteresting(graph);
 			ArrayList<Node> children=model.graph.findChildren(node);
-			System.out.println("children "+children.toString());
 			//System.out.println("it has "+children.size()+"children");
 			
 			try (PrintWriter out = resp.getWriter()) {

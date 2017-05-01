@@ -10,12 +10,15 @@ import java.util.*;
 
 /** has an instance of the graph**/
 public class Model {
-	Graph graph= new Graph();
+
+	Graph graph;
+	
 	Node currentNode; //initially set to the root
 	public Model() throws IOException {
 		/** store an instance of the graph  the graph
 		 * this gets initialzed in the constructor
 		 * **/
+		graph= new KGraph();
 		
 	}
 	
