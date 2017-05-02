@@ -18,7 +18,7 @@ public class Model {
 		/** store an instance of the graph  the graph
 		 * this gets initialzed in the constructor
 		 * **/
-		graph= new KGraph();
+		graph= new Graph();
 		
 	}
 	

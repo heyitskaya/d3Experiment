@@ -94,10 +94,20 @@ public class GraphServer extends AbstractHandler {
 		// if some asks for data.js, say this:
 		if("/data.js".equals(request.path)){
 			String nodeID = request.getParameter("node", "root");
-			
+			System.out.println("nodeID "+nodeID);
 			Node node = model.graph.findNode(nodeID);
-			//List<Edge> edges = node.findEdgesThatAreInteresting(graph);
+			System.out.println("node is null "+node==null);
+			
 			ArrayList<Node> children=model.graph.findChildren(node);
+			System.out.println("children is null "+children);
+			if(children==null)
+			{
+				System.out.println("if you know anything");
+				//return; //don't do anything
+				//we just print the current page
+				//resp.sendRedirect("/data.js?node=root"); //fuck
+				resp.sendRedirect("/data.js?node=root"); //fuck
+			}
 			//System.out.println("it has "+children.size()+"children");
 			
 			try (PrintWriter out = resp.getWriter()) {
@@ -106,8 +116,7 @@ public class GraphServer extends AbstractHandler {
 				out.println("<script>var links = [");
 				// edges!
 				for(Node n: children) {
-					//out.println()
-					//out.println(e.asJavascript()+",");
+					
 					StringBuilder sb= new StringBuilder("");
 					sb.append("{source:");
 					sb.append("\"");
