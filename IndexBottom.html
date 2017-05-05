@@ -79,10 +79,14 @@ function onclick(node){
   //assign to it a new url
   //localhost:1234/data.js?node="Woody"
   //http://localhost:1234/data.js?node=Woody
-  var s="http://localhost:1234/data.js?node=";
-  var newString=s+node.name;
-  console.log(newString);
-  location.assign(newString);
+  if(node.name!="Vascular")
+  {
+    var s="http://localhost:1234/data.js?node=";
+     var newString=s+node.name;
+     console.log(newString);
+   location.assign(newString);
+ }
+ //else do nothing
 }
 //var labels=['first plant','second plant']
 function mouseover(node) {

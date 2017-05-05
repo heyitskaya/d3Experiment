@@ -177,45 +177,6 @@ public class Graph {
 	}
 	
 	
-	//handing to javascript a list of edges, source target, label
-/**	public static void main(String[] args) {
-		Graph g = new Graph();
-		System.out.println("\"");
-	
-		//for every node in our tree
-		//for every child that the starting node has
-		for(Node n:g.root.children){
-			//{source: "Microsoft", target: "Amazon", type: "licensing"},
-			StringBuilder sb= new StringBuilder("");
-			sb.append("{source:");
-			sb.append("\"");
-			sb.append(g.root.name );
-			sb.append("\"");
-			sb.append(", target:");
-			sb.append("\"");
-			sb.append(n.name);
-			sb.append("\"");
-			sb.append(", type:");
-			sb.append("\"licensing\"}");
-			System.out.println(sb.toString());
-		}
-		
-		Node rootNode=g.findNode("2");
-		System.out.println("---------");
-		System.out.println(rootNode.id);
-		ArrayList<Node> list=rootNode.children;
-		System.out.println("----------");
-
-		//System.out.println("----------");
-		
-		
-	} **/
-	
-	
-	
-	
-	
-	
 	
 	
 }
