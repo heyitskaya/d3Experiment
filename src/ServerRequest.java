@@ -29,7 +29,7 @@ public class ServerRequest {
 		}
 
 		this.cookies = new HashMap<>();
-		// convert Jetty's cookies to a less-annoying datastructure
+		// convert Jetty's cookies to a less-annoying data structure
 		Cookie[] fromRequest = req.getCookies();
 		if (fromRequest != null) {
 			for (Cookie cookie : fromRequest) {

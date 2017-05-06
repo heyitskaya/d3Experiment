@@ -105,10 +105,9 @@ public class GraphServer extends AbstractHandler {
 				System.out.println("if you know anything");
 				//return; //don't do anything
 				//we just print the current page
-				//resp.sendRedirect("/data.js?node=root"); //fuck
-				resp.sendRedirect("/data.js?node=root"); //fuck
+				
+				resp.sendRedirect("/data.js?node=root"); 
 			}
-			//System.out.println("it has "+children.size()+"children");
 			
 			try (PrintWriter out = resp.getWriter()) {
 				view.printHTMLTop(out);
@@ -137,7 +136,6 @@ public class GraphServer extends AbstractHandler {
 				
 				out.println("extraNodeInfo['"+node.name+"']= {description: '"+node.description+"'};");
 				for(Node n : children) {
-					// print info.put(name, values) statements for each node
 					
 					out.println("extraNodeInfo['"+n.name+"']= {description: '"+n.description+"'};");
 				}
@@ -149,7 +147,6 @@ public class GraphServer extends AbstractHandler {
 				
 				out.println("</script>");
 				
-				//out.println("console.log('hello from data.js for node="+node+"');");
 				view.printHTMLBottom(out);
 			} 
 			return;
@@ -157,160 +154,8 @@ public class GraphServer extends AbstractHandler {
 	
 		
 		//if they ask for something else, send them to root:
-		resp.sendRedirect("/data.js?node=root"); //fuck
-		
-	/**	//create a settings page
-		if("/settings".equals(request.path)){
-			if("POST".equals(request.method)){
-				//handle update of preferences
-				boolean newShowRandom=request.hasParameter("showRandom");
-				Cookie showRandom=request.getCookie("showRandom");
-				if(showRandom== null){
-					showRandom=new Cookie("showRandom", "new");
-				}
-				showRandom.setValue(newShowRandom ? "true" : "false");
-				request.sendCookie(showRandom);
-			}
-			else if("GET".equals(request.method)){
-				//view.showSettingsForm(request);
-			}
-		}
-		if("POST".equals(request.method) && "/report".equals(request.path)) {
-			model.reportBook(request.getParameter("book", "ERROR"));
-			// tell the browser to redirect the user to list of reported books:
-			request.resp.setStatus(HttpServletResponse.SC_SEE_OTHER);
-			request.resp.setHeader("Location", "/reported");
-			try (PrintWriter out = request.resp.getWriter()) {
-				out.println("/reported");
-			}
-			// done.
-			return;
-		}
-		String path = request.path;
-		if("/login".equals(path)){
-			String userName=Util.join(map.get("user"));
-			request.sendCookie(new Cookie("user", userName));
-			view.printLoginConfirmation(request.resp.getWriter());
-		}
-		if("/logout".equals(path)){ //if the user is attempting to log out
-			
-			view.showFrontPage(model, resp,request);
-			
-		}
-		if("/like".equals(path) ){ //and method is post
-			String bookID=Util.join(map.get("book"));
-			GutenbergBook book=model.library.get(bookID);
-			if(request.hasCookie("user")){
-				
-				Cookie userCookie=request.getCookie("user"); 
-				if(book!=null){
-					String userName=userCookie.getValue();
-					book.usersLiked.add(userName); //add users name
-					
-					
-					book.numLikes=book.usersLiked.size();
-					model.likeBook(bookID); 
-					
-					
-					
-				}
-				view.displayLikesPage(resp, model.booksLiked);
-				
-				
-			}
-			else{ //when it doesnt have that cookie we send them to the login page
-				//restart
-				view.showFrontPage(model, resp,request);
-			}
-		}
-		
-		if (!"GET".equals(request.method)) {
-			return;
-		}
-		if("/robots.txt".equals(path)) {
-			// We're returning a fake file? Here's why: http://www.robotstxt.org/
-			resp.setContentType("text/plain");
-			try (PrintWriter txt = resp.getWriter()) {
-				txt.println("User-Agent: *");
-				txt.println("Disallow: /");
-			}
-			return;
-		}
-		if("/reported".equals(path)) {
-			view.showBookCollection(model.getReportedBooks(), request, "Books that have been reported", Collections.emptyMap());
-			return;
-		}
-		if("/search".equals(path)) {
-			String query = request.getParameter("q", "");
-			Map<String, String> params = Collections.singletonMap("q", query);
-			view.showBookCollection(model.searchBooks(query), request, "Books matching '"+query+"'", params);
-			return;
-		}
-		// Title pages
-		String titleCmd = Util.getAfterIfStartsWith("/title/", path);
-		if(titleCmd != null) {
-			char firstChar = titleCmd.charAt(0);
-			view.showBookCollection(this.model.getBooksStartingWith(firstChar), request, "Books starting with '"+firstChar+"'", Collections.emptyMap());
-			return;
-		}
-		String authorCmd=Util.getAfterIfStartsWith("/author/",path);
-		if(authorCmd!=null && authorCmd.length()!=0){ //might not be null but might also be empty
-			//get the first letter
-			char firstChar=authorCmd.charAt(0);
-			view.showBookCollectionByAuthor(this.model.getAuthorStartingWith(firstChar),request,"Authors starting with",Collections.emptyMap());
-		}
-		// Per-book pages
-		String bookId = Util.getAfterIfStartsWith("/book/", path);
-		if(bookId != null) {
-			view.showBookPage(this.model.getBook(bookId), resp);
-			return;
-		}
-		//only gonna check when there's an author
-		if(path.startsWith("/author")) {
-			String firstName=Util.join(map.get("first"));
-			String lastName=Util.join(map.get("last"));
-			
-			HashMap<ArrayList<String>,Author> authorLibrary=model.authorLibrary;
-			ArrayList<String> fullName= new ArrayList<String>();
-			fullName.add(lastName);
-			fullName.add(firstName);
-			
-			
-			Author currAuthor=authorLibrary.get(fullName);
-			if(currAuthor!=null){
-				PrintWriter html = resp.getWriter();
-				view.printBooksBySingleAuthor(html,currAuthor);
-				html.close();
-			}
-		}
-		// Front page!
-		if ("/front".equals(path) || "/".equals(path)) {
-			view.showFrontPage(this.model, resp,request);
-			return;
-		} **/
+		resp.sendRedirect("/data.js?node=root"); 
 	}
-	
-	//book <--->user defined as string
-	//book has a set of users
-	//users have a set of books
-	//login form only has username, turn username into a cookie give it to brower and browser sends it to us anytime
-	
-	//recommend only keeping track of one set
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
